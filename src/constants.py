@@ -19,6 +19,8 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 DATA_FOLDER = PROJECT_ROOT / "data"
 REPLAY_FOLDER = DATA_FOLDER / "replays"
 DB_PATH = DATA_FOLDER / "teams" / "teams.db"
+DB_PATH = Path(DB_PATH)
+DB_PATH.parent.mkdir(parents=True, exist_ok=True)
 
 API_URL = "https://warthunder.com/ru/api/replay"
 BASE_URL = "https://wt-game-replays.warthunder.com"
