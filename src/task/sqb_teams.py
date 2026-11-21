@@ -11,7 +11,7 @@ from src.services.requests import check_replays, load_state
 from src.services.sql import init_sql, add_new_teams_sql, filter_sql, update_teams_sql, update_time_sql, select_allplayers_sql
 
 
-async def process_saved_results(*, delete_replays: bool = False) -> dict[str, dict]:
+async def process_saved_results(*, delete_replays: bool = True) -> dict[str, dict]:
     replay_root = REPLAY_FOLDER.resolve()
     results = {}
 
