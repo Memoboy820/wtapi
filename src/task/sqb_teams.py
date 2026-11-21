@@ -143,7 +143,7 @@ async def task() -> None:
             except Exception:
                 logger.exception("Ошибка проверки реплеев. Попробую сохранить уже готовые результаты.")
 
-            results = await process_saved_results(delete_replays=False)
+            results = await process_saved_results(delete_replays=True)
 
             logger.info(
                 "Обработка JSON закончена. Боёв=%s, теги=%s",
