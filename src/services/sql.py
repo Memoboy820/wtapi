@@ -25,6 +25,11 @@ def init_sql():
 
 
 def add_new_teams_sql(tag: str, player_vehicle: dict, players: list[str]):
+    tag = tag.strip()
+    while tag and not tag[0].isalnum():
+        tag = tag[1:]
+    while tag and not tag[-1].isalnum():
+        tag = tag[:-1]
 
     player_vehicle_text = json_lib.dumps(player_vehicle)
     players_text = json_lib.dumps(sorted(players))
