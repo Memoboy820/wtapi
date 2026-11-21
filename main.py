@@ -5,7 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from src.services.sql import init_sql
 from asyncio import to_thread
 import asyncio
-from src.task.sqb_teams import main
+from src.task.sqb_teams import task
 import logging
 
 
@@ -14,7 +14,7 @@ import logging
 async def lifespan(app: FastAPI):
     await asyncio.to_thread(init_sql)
 
-    collector_task = asyncio.create_task(main())
+    collector_task = asyncio.create_task(task())
 
     try:
         yield
