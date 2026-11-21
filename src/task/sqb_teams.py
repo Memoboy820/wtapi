@@ -111,7 +111,10 @@ async def process_saved_results(*, delete_replays: bool = False) -> dict[str, di
     return results
 
 
-async def main() -> None:
+
+
+
+async def task() -> None:
     await to_thread(init_sql)
     state = await to_thread(load_state)
 
@@ -140,8 +143,21 @@ async def main() -> None:
             except Exception:
                 logger.exception("Ошибка проверки реплеев. Попробую сохранить уже готовые результаты.")
 
-            await process_saved_results(delete_replays=True)
+            results = await process_saved_results(delete_replays=False)
+
+            logger.info(
+                "Обработка JSON закончена. Боёв=%s, теги=%s",
+                len(results),
+                sorted({tag for result in results.values() for tag in result}),
+            )
+
+            players_before = await to_thread(select_allplayers_sql)
+            logger.info("Составов в SQL до filter_sql: %s", len(players_before))
+
             await to_thread(filter_sql, 3600)
+
+            players_after = await to_thread(select_allplayers_sql)
+            logger.info("Составов в SQL после filter_sql: %s", len(players_after))
 
         except asyncio.CancelledError:
             raise
@@ -158,6 +174,6 @@ if __name__ == "__main__":
     logging.getLogger("httpx").setLevel(logging.WARNING)
 
     try:
-        asyncio.run(main())
+        asyncio.run(task())
     except KeyboardInterrupt:
         pass
