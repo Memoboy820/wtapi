@@ -71,9 +71,9 @@ CHECK_INTERVAL = 10
 BATTLE_LIMIT = 20
 
 # макс скачиваний за рз
-DOWNLOAD_CONCURRENCY = 20
+DOWNLOAD_CONCURRENCY = 3
 
-REQUEST_DELAY = 1
+REQUEST_DELAY = 2
 
 __all__ = [
     "ReplayServiceError",
