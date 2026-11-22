@@ -68,7 +68,7 @@ API_RESPONSE_FILE = DATA_FOLDER / "replay_response.json"
 REPLAY_FOLDER = PROJECT_ROOT / "data" / "replays"
 
 CHECK_INTERVAL = 10
-BATTLE_LIMIT = 20
+BATTLE_LIMIT = 5
 
 # макс скачиваний за рз
 DOWNLOAD_CONCURRENCY = 3
